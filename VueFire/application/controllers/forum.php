@@ -4,20 +4,20 @@ class Forum extends CI_Controller
 {
 	public function index()
 	{
+        $this->output->enable_profiler(TRUE); // temporary
         // load what we need
         $this->load->model('forums_model');
         $this->load->model('template_model');
 
+        // load data
         $this->forums_model->get_forums_data();
-
-        $this->output->enable_profiler(TRUE);
 
         // load our html
         $this->data['header'] = $this->template_model->header();
-        $this->data['content'] = $this->parser->parse('templates/' . $this->settings_model->get('default_template') . '/forum_list', array(), true);
+        $this->data['content'] = $this->parser->parse($this->settings_model->get('default_template') . '/forum_list', array(), true);
         $this->data['footer'] = $this->template_model->footer();
 
-        $this->parser->parse('templates/' . $this->settings_model->get('default_template') . '/shell', $this->data);
+        $this->parser->parse($this->settings_model->get('default_template') . '/shell', $this->data);
 	}
 }
 
