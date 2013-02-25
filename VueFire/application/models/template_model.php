@@ -2,8 +2,6 @@
 
 class template_Model extends CI_Model
 {
-    private $arrSettings = array();
-
     /**
      *
      *
@@ -12,26 +10,24 @@ class template_Model extends CI_Model
     {
         // inherit
         parent::__construct();
-
-        // get all the settings from the database
-        $this->db->select(array('settings_name', 'settings_data', 'settings_id', 'settings_area'));
-        $this->arrSettings = $this->db->get('settings')->result_array();
     }
 
     /**
      *
      */
-    function get()
+    public function header()
     {
-
-
+        // generic header
+        return 'header';
     }
 
     /**
      *
      */
-    function set()
+    public function footer()
     {
-
+        // generic footer
+        return 'footer';
     }
+
 }

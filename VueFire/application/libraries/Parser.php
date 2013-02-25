@@ -89,9 +89,9 @@ class parser
 					}
 				}
 				
-				$this->config->file = $this->_path(TRUE) . $this->config->theme . '/' .  $this->config->template_suffix . '/' . $input . '.' . $this->config->extension;
+				$this->config->file = $this->_path(TRUE) . $input . '.' . $this->config->extension;
         		$this->config->folder = $this->_path() . $this->config->theme;
-        		
+
         		if ( ! $this->data->input = (string) read_file($this->config->file) )
         		{
         			return FALSE;

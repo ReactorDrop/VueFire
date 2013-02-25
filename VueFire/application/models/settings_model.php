@@ -15,16 +15,26 @@ class settings_Model extends CI_Model
 
         // get all the settings from the database
         $this->db->select(array('settings_name', 'settings_data', 'settings_id', 'settings_area'));
-        $this->arrSettings = $this->db->get('settings')->result_array();
+        foreach($this->db->get('settings')->result_array() as $arrSetting)
+        {
+            $this->arrSettings[$arrSetting['settings_name']] = $arrSetting;
+        }
     }
 
     /**
      *
      */
-    function get()
+    function get($strSetting)
     {
-
-
+        // check and return this setting
+        if(isset($this->arrSettings[$strSetting]))
+        {
+            return $this->arrSettings[$strSetting]['settings_data'];
+        }
+        else
+        {
+            return null;
+        }
     }
 
     /**

@@ -2,7 +2,10 @@
 
 class Forum extends CI_Controller
 {
-	public function index()
+    /**
+     *
+     */
+    public function index()
 	{
         $this->output->enable_profiler(TRUE); // temporary
         // load what we need
@@ -14,10 +17,10 @@ class Forum extends CI_Controller
 
         // load our html
         $this->data['header'] = $this->template_model->header();
-        $this->data['content'] = $this->parser->parse($this->settings_model->get('default_template') . '/forum_list', array(), true);
+        $this->data['content'] = $this->parser->parse($this->settings_model->get('default_template') . '/forum_list', array(), array('show' => false, 'disable_includes' => true));
         $this->data['footer'] = $this->template_model->footer();
 
-        $this->parser->parse($this->settings_model->get('default_template') . '/shell', $this->data);
+        $this->parser->parse($this->settings_model->get('default_template') . '/shell', $this->data, array('show' => true));
 	}
 }
 
