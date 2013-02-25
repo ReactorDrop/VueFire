@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class settings_Model extends CI_Model
+class template_Model extends CI_Model
 {
     private $arrSettings = array();
 
