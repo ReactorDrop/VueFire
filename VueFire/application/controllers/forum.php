@@ -13,8 +13,8 @@ class Forum extends CI_Controller
         $this->load->model('template_model');
 
         // load data
-        $this->forums_model->get_forums_data();
-
+        $arrData = $this->forums_model->get_forums_structure();
+        echo('<pre>' . print_r($arrData, true) . '</pre>');
         // load our html
         $this->data['header'] = $this->template_model->header();
         $this->data['content'] = $this->parser->parse($this->settings_model->get('default_template') . '/forum_list', array(), array('show' => false, 'disable_includes' => true));
