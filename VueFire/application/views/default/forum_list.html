@@ -1,0 +1,17 @@
+<!-- IF {forums_structure|count} > 0 -->
+        category<br /><br />
+    <!-- BEGIN forums_structure AS categories -->
+        {categories.forum_name}<br /><br />
+
+        <!-- BEGIN {categories.forums} AS category_forums -->
+            -- {category_forums.forum_name}<br />
+
+            <!-- BEGIN {category_forums.forums} AS sub_forums -->
+                -- -- {sub_forums.forum_name}<br />
+            <!-- END sub_forums -->
+        <!-- END category_forums -->
+    <!-- END forums_structure -->
+
+        <br /><br />
+<!-- ELSE -->
+<!-- END -->
