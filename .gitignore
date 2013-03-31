@@ -126,9 +126,6 @@ Thumbs.db
 # Folder config file
 Desktop.ini
 
-VueFire\application\config\database.php
-
-
 #############
 ## Python
 #############
@@ -163,3 +160,15 @@ pip-log.txt
 
 # Mac crap
 .DS_Store
+
+#############
+## VueFire
+#############
+
+VueFire\application\config\database.php
+
+#############
+## PHPSTORM
+#############
+
+.idea
