@@ -43,13 +43,27 @@ class forums_Model extends CI_Model
         if(!empty($this->arrForums))
         {
             // reorder based on parent
-            foreach($this->arrForums as $arrSection)
+          $arrForumsTemp = array();
+
+          foreach($this->arrForums as $arrSection)
+          {
+            $arrForumsTemp[$arrSection['forum_id']] = $arrSection;
+          }
+
+          // reset and clean
+          $this->arrForums = $arrForumsTemp;
+          unset($arrForumsTemp);
+
+          foreach($this->arrForums as $intKey => $arrSection)
+          {
+            if($arrSection['forum_parent'] === null)
             {
-                
+              $this->arrStorage['forums'][$intKey] = $arrSection;
+              $this->arrStorage['forums'][$intKey]['forums'] = $this->find_children($arrSection['forum_id']);
             }
+          }
 
-
-            foreach($this->arrForums as $arrSection)
+          /*  foreach($this->arrForums as $arrSection)
             {
                 print_r($arrSection);
                 switch($arrSection['forum_type'])
@@ -64,12 +78,35 @@ class forums_Model extends CI_Model
                         break;
                 }
                 #$this->arrStorage['forums'];
-            }
+            }*/
         }
 
         echo('<pre>' . print_r($this->arrStorage['forums'], true) . '</pre>');
         print_r($this->arrForums);
     }
 
+  private function find_children($parentid)
+  {
+    $arrtempdata = array();
+    foreach($this->arrForums as $arrSection)
+    {
+      if($arrSection['forum_parent'] === $parentid)
+      {
+        $arrtempdata[$arrSection['forum_id']] = $arrSection;
+        unset($this->arrForums[$arrSection['forum_id']]);
+
+        $arrtempdata[$arrSection['forum_id']]['forums'] = $this->find_children($arrSection['forum_id']);
+      }
+    }
+
+    if(empty($arrtempdata))
+    {
+      return array();
+    }
+    else
+    {
+      return $arrtempdata;
+    }
+  }
 
 }
