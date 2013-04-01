@@ -4,7 +4,6 @@
 class forums_Model extends CI_Model
 {
   private $arrStorage = array();
-
   private $arrForums = array();
   private $arrLatestPosts = array();
   private $arrStatistics = array();
@@ -28,15 +27,7 @@ class forums_Model extends CI_Model
   {
     // are we selecting all or just for this one forum?
     $this->arrForums = $this->db->get('forums')->result_array();
-    $this->arrLatestPosts = $this->db->select(array('post_id', 'topic_id', 'forum_id', 'post_title', 'post_subject', 'post_user_id', 'post_time', 'user_name', 'user_id'))
-      ->from('posts')
-      ->join('users', 'users.user_id = posts.post_user_id')
-      ->group_by('forum_id')
-      ->order_by('post_time', 'desc')
-      #->order_by('post_id', 'desc')
-      ->get()
-      ->result_array();
-    $this->arrStatistics = $this->db->get_where('global_stats', array('obj_type' => 1))->result_array();
+    $this->arrStatistics = $this->statistics_model->get_global_statistics();
 
     // define
     $this->arrStorage['forums'] = array();
@@ -44,17 +35,37 @@ class forums_Model extends CI_Model
     // define our structure
     if (!empty($this->arrForums))
     {
+      // grab our last posts
+      $this->arrLatestPosts = $this->db->select(array('post_id', 'topic_id', 'forum_id', 'post_title', 'post_subject', 'post_user_id', 'post_time', 'user_name', 'user_id'))
+        ->from('posts')
+        ->join('users', 'users.user_id = posts.post_user_id')
+        ->group_by('forum_id')
+        ->order_by('post_time', 'desc')
+        #->order_by('post_id', 'desc')
+        ->get()
+        ->result_array();
+
       // reorder based on parent
       $arrForumsTemp = array();
 
-      foreach ($this->arrForums as $arrSection)
+      foreach ($this->arrForums as &$arrSection)
       {
+        $arrSection['forum_name_url'] = url_title($arrSection['forum_name'], '_', true);
         $arrForumsTemp[$arrSection['forum_id']] = $arrSection;
       }
 
+      // loop through latest posts and assign to a forum
+      foreach($this->arrLatestPosts as $arrLastPost)
+      {
+        if(isset($arrForumsTemp[$arrLastPost['forum_id']]))
+        {
+          $arrForumsTemp[$arrLastPost['forum_id']]['latest_post'] = $arrLastPost;
+        }
+      }
+echo('<pre>');print_r($this->arrStatistics);echo('</pre>');
       // reset and clean
       $this->arrForums = $arrForumsTemp;
-      unset($arrForumsTemp);
+      unset($arrForumsTemp, $this->arrLatestPosts);
 
       // loop through to build our forum structure
       foreach ($this->arrForums as $intKey => $arrSection)
@@ -72,6 +83,12 @@ class forums_Model extends CI_Model
     return $this->arrStorage['forums'];
   }
 
+  /**
+   * find the children of that parent (infinite reference)
+   *
+   * @param integer $intParentId the parent id of the forum to find children for
+   * @return array a blank array or an array containing the typical structure
+   */
   private function &find_children($intParentId)
   {
     $arrTempData = array();

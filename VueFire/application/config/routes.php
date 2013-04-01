@@ -38,8 +38,20 @@
 |
 */
 
+// default routes
 $route['default_controller'] = 'forum';
 $route['404_override'] = '';
+
+// forum routes
+$route['f(:num)-(:any).html'] = 'forum/view/$1';
+
+// thread routes
+
+
+// search routes
+
+
+// profile routes
 
 
 /* End of file routes.php */
