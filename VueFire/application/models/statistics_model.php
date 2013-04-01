@@ -24,8 +24,22 @@ class statistics_Model extends CI_Model
     //
     foreach($arrStats as $arrStat)
     {
-      #$this->arrStorage['global']['forums'] =
-      #$this->arrStorage['global']['general'] =
+      switch($arrStat['obj_type'])
+      {
+        case 'general':
+          $this->arrStorage['global']['general'][$arrStat['obj_name']] = $arrStat;
+          break;
+        case 'forum':
+          echo($arrStat['obj_name']);
+          $arrPieces = explode('_', $arrStat['obj_name']);
+
+          $this->arrStorage['global']['forum'][$arrPieces[0]][$arrPieces[1]] = $arrStat['obj_data'];
+
+          break;
+      }
     }
+
+    unset($arrStats);
+    return $this->arrStorage['global'];
   }
 }

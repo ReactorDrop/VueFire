@@ -9,7 +9,7 @@ class Forum extends CI_Controller
   {
     $this->output->enable_profiler(true); // temporary
     // load what we need
-    $this->load->model(array('forums_model', 'template_model'));
+    $this->load->model(array('forums_model', 'template_model', 'statistics_model', 'url_model'));
     $this->load->helper('url');
 
     // load data

@@ -1,5 +1,4 @@
-<?php if (!defined('BASEPATH'))
-  exit('No direct script access allowed');
+<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
 class forums_Model extends CI_Model
 {
@@ -36,20 +35,19 @@ class forums_Model extends CI_Model
     if (!empty($this->arrForums))
     {
       // grab our last posts
-      $this->arrLatestPosts = $this->db->select(array('post_id', 'topic_id', 'forum_id', 'post_title', 'post_subject', 'post_user_id', 'post_time', 'user_name', 'user_id'))
-        ->from('posts')
-        ->join('users', 'users.user_id = posts.post_user_id')
-        ->group_by('forum_id')
-        ->order_by('post_time', 'desc')
-        #->order_by('post_id', 'desc')
-        ->get()
-        ->result_array();
+      $this->get_latest_posts();
 
       // reorder based on parent
       $arrForumsTemp = array();
 
       foreach ($this->arrForums as &$arrSection)
       {
+        // add in statistics
+        if(isset($this->arrStatistics['forum'][$arrSection['forum_id']]))
+        {
+          $arrSection['statistics'] = $this->arrStatistics['forum'][$arrSection['forum_id']];
+        }
+
         $arrSection['forum_name_url'] = url_title($arrSection['forum_name'], '_', true);
         $arrForumsTemp[$arrSection['forum_id']] = $arrSection;
       }
@@ -62,7 +60,7 @@ class forums_Model extends CI_Model
           $arrForumsTemp[$arrLastPost['forum_id']]['latest_post'] = $arrLastPost;
         }
       }
-echo('<pre>');print_r($this->arrStatistics);echo('</pre>');
+
       // reset and clean
       $this->arrForums = $arrForumsTemp;
       unset($arrForumsTemp, $this->arrLatestPosts);
@@ -80,6 +78,7 @@ echo('<pre>');print_r($this->arrStatistics);echo('</pre>');
 
     // cleanup and return
     unset($this->arrForums);
+    echo('<pre>' . print_r($this->arrStorage['forums'], true) . '</pre>');
     return $this->arrStorage['forums'];
   }
 
@@ -104,6 +103,23 @@ echo('<pre>');print_r($this->arrStatistics);echo('</pre>');
     }
 
     return $arrTempData;
+  }
+
+  /**
+   *
+   */
+  public function get_latest_posts($intForumId = null)
+  {
+    $this->arrLatestPosts = $this->db->select(array('post_id', 'topic_id', 'forum_id', 'post_title', 'post_subject', 'post_user_id', 'post_time', 'user_name', 'user_id'))
+      ->from('posts')
+      ->join('users', 'users.user_id = posts.post_user_id')
+      ->group_by('forum_id')
+      ->order_by('post_time', 'desc')
+      #->order_by('post_id', 'desc')
+      ->get()
+      ->result_array();
+
+    return $this->arrLatestPosts;
   }
 
 }
