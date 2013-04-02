@@ -15,8 +15,8 @@ class url_Model extends CI_Model
     /**
      *
      */
-    public function forum()
+    public function forum($intForumId, $strForumName)
     {
-
+      return 'f' . (int)$intForumId . '-' . (string)url_title($strForumName, '_', true) . '.html';
     }
 }

@@ -4,10 +4,12 @@
         {categories.forum_name}<br /><br />
 
         <!-- BEGIN {categories.forums} AS category_forums -->
-            -- <a href="f{category_forums.forum_id}-{category_forums.forum_name_url}.html">{category_forums.forum_name}</a><br />
+            -- <a href="{category_forums.forum_name_url}">{category_forums.forum_name}</a>
+                ({category_forums.statistics.posts} posts, {category_forums.statistics.topics} topics)<br />
 
             <!-- BEGIN {category_forums.forums} AS sub_forums -->
-                -- -- <a href="f{sub_forums.forum_id}-{sub_forums.forum_name_url}.html">{sub_forums.forum_name}</a><br />
+                -- -- <a href="{sub_forums.forum_name_url}">{sub_forums.forum_name}</a>
+                    ({sub_forums.statistics.posts} posts, {sub_forums.statistics.topics} topics) <br />
             <!-- END sub_forums -->
         <!-- END category_forums -->
     <!-- END forums_structure -->

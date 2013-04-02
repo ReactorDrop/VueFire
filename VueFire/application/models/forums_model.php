@@ -48,7 +48,7 @@ class forums_Model extends CI_Model
           $arrSection['statistics'] = $this->arrStatistics['forum'][$arrSection['forum_id']];
         }
 
-        $arrSection['forum_name_url'] = url_title($arrSection['forum_name'], '_', true);
+        $arrSection['forum_name_url'] = $this->url_model->forum($arrSection['forum_id'], $arrSection['forum_name']);
         $arrForumsTemp[$arrSection['forum_id']] = $arrSection;
       }
 

@@ -16,8 +16,9 @@ class Forum extends CI_Controller
     $arrData['forums_structure'] = $this->forums_model->get_forums_structure();
 
     // build our html
+    $this->data['title'] = 'Home - VueFire';
     $this->data['header'] = $this->template_model->header();
-    $this->data['content'] = $this->parser->parse($this->settings_model->get('default_template') . '/forum_list', $arrData, array('show' => false, 'disable_includes' => true));
+    $this->data['content'] = $this->parser->parse($this->template_model->get_template_path() . '/forum_list', $arrData, array('show' => false, 'disable_includes' => true));
     $this->data['footer'] = $this->template_model->footer();
     $this->parser->parse($this->settings_model->get('default_template') . '/shell', $this->data, array('show' => true));
   }
