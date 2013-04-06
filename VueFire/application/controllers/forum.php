@@ -4,6 +4,7 @@ class Forum extends CI_Controller
 {
   /**
    *
+   * @return void
    */
   public function index()
   {
@@ -23,6 +24,10 @@ class Forum extends CI_Controller
     $this->parser->parse($this->settings_model->get('default_template') . '/shell', $this->data, array('show' => true));
   }
 
+  /**
+   * @param $intForumId forum id that we're "in"
+   * @return void
+   */
   public function view($intForumId)
   {
     //
