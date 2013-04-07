@@ -5,11 +5,11 @@
 
         <!-- BEGIN {categories.forums} AS category_forums -->
             -- <a href="{category_forums.forum_name_url}">{category_forums.forum_name}</a>
-                ( {category_forums->statistics:posts} posts, {category_forums->statistics:topics} topics)<br />
+                ( {category_forums.statistics->posts} posts, {category_forums.statistics->topics} topics)<br />
 
             <!-- BEGIN {category_forums.forums} AS sub_forums -->
                 -- -- <a href="{sub_forums.forum_name_url}">{sub_forums.forum_name}</a>
-                    ( {sub_forums->statistics:posts} posts, {sub_forums->statistics:topics} topics) <br />
+                    ( {sub_forums.statistics->posts} posts, {sub_forums.statistics->topics} topics) <br />
             <!-- END sub_forums -->
         <!-- END category_forums -->
     <!-- END forums_structure -->
