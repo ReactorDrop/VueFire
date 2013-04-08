@@ -122,4 +122,31 @@ class forums_Model extends CI_Model
     return $this->arrLatestPosts;
   }
 
+  /**
+   *
+   */
+  public function get_forum_topics($intForumId, $intOffset = 0, $intLimit = 16)
+  {
+    $this->arrStorage['topics'][$intForumId][$intOffset . ',' . $intLimit] =
+    $this->db->select(array('topic_sticky', 'topic_locked', 'topic_views', 'topic_id', 'topic_title', 'topic_subject',
+                            'topic_prefix', 'UNIX_TIMESTAMP(topic_lupdate) AS `unix_time`', 'topic_starter'))
+      ->from('topics')
+      ->where('topic_forum_id', $intForumId)
+      ->limit($intLimit, $intOffset)
+      ->get()
+      ->result_array();
+
+
+
+    /*"SELECT t.topic_forum_id, t.topic_sticky, t.topic_locked, t.topic_views, t.topic_id, t.topic_title, t.topic_subject, t.topic_prefix,
+    UNIX_TIMESTAMP(t.topic_lupdate) AS `unix_time`, u.user_id, u.user_name, COUNT(p.post_id) AS 'posts'
+    FROM nbb_topics t
+    LEFT JOIN nbb_users u ON t.topic_starter = u.user_id
+    LEFT JOIN nbb_posts p ON t.topic_id = p.topic_id
+    WHERE t.topic_forum_id = '" . Db_Abstraction::clean($_GET['id']) . "'
+    GROUP BY t.topic_id ORDER BY t.topic_sticky DESC, t.topic_lupdate DESC
+    LIMIT " . $pagination_system->getLimit();*/
+    return $this->arrStorage['topics'][$intForumId][$intOffset . ',' . $intLimit];
+  }
+
 }

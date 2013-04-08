@@ -2,13 +2,18 @@
 
 class Forum extends CI_Controller
 {
+  public function __construct()
+  {
+    parent::__construct();
+    $this->output->enable_profiler(true); // temporary
+  }
+
   /**
    *
    * @return void
    */
   public function index()
   {
-    $this->output->enable_profiler(true); // temporary
     // load what we need
     $this->load->model(array('forums_model', 'template_model', 'statistics_model', 'url_model'));
     $this->load->helper('url');
@@ -30,8 +35,13 @@ class Forum extends CI_Controller
    */
   public function view($intForumId)
   {
+    // load what we need
+    $this->load->model(array('forums_model', 'template_model', 'url_model'));
+    $this->load->helper('url');
+
     //
     echo($intForumId);
+    print_r($this->forums_model->get_forum_topics($intForumId));
   }
 }
 
