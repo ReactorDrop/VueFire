@@ -10,15 +10,19 @@ class settings_Model extends CI_Model
      */
     function __construct()
     {
-        // inherit
-        parent::__construct();
+      // inherit
+      parent::__construct();
 
-        // get all the settings from the database
-        $this->db->select(array('settings_name', 'settings_data', 'settings_id', 'settings_area'));
-        foreach($this->db->get('settings')->result_array() as $arrSetting)
-        {
-            $this->arrSettings[$arrSetting['settings_name']] = $arrSetting;
-        }
+      $this->benchmark->mark('settings_construct_start');
+
+      // get all the settings from the database
+      $this->db->select(array('settings_name', 'settings_data', 'settings_id', 'settings_area'));
+      foreach($this->db->get('settings')->result_array() as $arrSetting)
+      {
+          $this->arrSettings[$arrSetting['settings_name']] = $arrSetting;
+      }
+
+      $this->benchmark->mark('settings_construct_end');
     }
 
     /**

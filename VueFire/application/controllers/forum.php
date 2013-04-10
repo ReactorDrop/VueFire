@@ -22,11 +22,13 @@ class Forum extends CI_Controller
     $arrData['forums_structure'] = $this->forums_model->get_forums_structure();
 
     // build our html
+    $this->benchmark->mark('building_html_start');
     $this->data['title'] = 'Home - VueFire';
     $this->data['header'] = $this->template_model->header();
     $this->data['content'] = $this->parser->parse($this->template_model->get_template_path() . '/forum_list', $arrData, array('show' => false, 'disable_includes' => true));
     $this->data['footer'] = $this->template_model->footer();
-    $this->parser->parse($this->settings_model->get('default_template') . '/shell', $this->data, array('show' => true));
+    $this->parser->parse(FCPATH . '/' . $this->settings_model->get('default_template') . '/shell', $this->data, array('show' => true));
+    $this->benchmark->mark('building_html_end');
   }
 
   /**
@@ -40,8 +42,13 @@ class Forum extends CI_Controller
     $this->load->helper('url');
 
     //
+    $arrForumInfo = $this->forums_model->get_info($intForumId);
+print_r($arrForumInfo);
+    //
     echo($intForumId);
+    echo('<pre>');
     print_r($this->forums_model->get_forum_topics($intForumId));
+    echo('</pre>');
   }
 }
 

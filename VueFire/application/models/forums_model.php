@@ -131,6 +131,7 @@ class forums_Model extends CI_Model
     $this->db->select(array('topic_sticky', 'topic_locked', 'topic_views', 'topic_id', 'topic_title', 'topic_subject',
                             'topic_prefix', 'UNIX_TIMESTAMP(topic_lupdate) AS `unix_time`', 'topic_starter'))
       ->from('topics')
+      ->join('users', 'users.user_id = topics.topic_starter')
       ->where('topic_forum_id', $intForumId)
       ->limit($intLimit, $intOffset)
       ->get()
@@ -147,6 +148,11 @@ class forums_Model extends CI_Model
     GROUP BY t.topic_id ORDER BY t.topic_sticky DESC, t.topic_lupdate DESC
     LIMIT " . $pagination_system->getLimit();*/
     return $this->arrStorage['topics'][$intForumId][$intOffset . ',' . $intLimit];
+  }
+
+  public function get_info($intForumId)
+  {
+
   }
 
 }
