@@ -1188,6 +1188,7 @@ class parser
 
   private function _path($is_file = FALSE)
   {
+    /*
     if ($is_file)
     {
       $apppath = APPPATH;
@@ -1200,7 +1201,7 @@ class parser
         $this->CI->config->item('base_url') . trim(APPPATH, '/');
     }
 
-    return str_replace(array('%path%', '%apppath%', '%basepath%'), array($apppath, APPPATH, BASEPATH), $this->config->path);
+    return str_replace(array('%path%', '%apppath%', '%basepath%'), array($apppath, APPPATH, BASEPATH), $this->config->path);*/
   }
 }
 

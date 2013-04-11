@@ -25,9 +25,9 @@ class Forum extends CI_Controller
     $this->benchmark->mark('building_html_start');
     $this->data['title'] = 'Home - VueFire';
     $this->data['header'] = $this->template_model->header();
-    $this->data['content'] = $this->parser->parse($this->template_model->get_template_path() . '/forum_list', $arrData, array('show' => false, 'disable_includes' => true));
+    $this->data['content'] = $this->parser->parse($this->template_model->get_template_path() . 'forum_list', $arrData, array('show' => false, 'disable_includes' => true));
     $this->data['footer'] = $this->template_model->footer();
-    $this->parser->parse(FCPATH . '/' . $this->settings_model->get('default_template') . '/shell', $this->data, array('show' => true));
+    $this->parser->parse($this->template_model->get_template_path() . 'shell', $this->data, array('show' => true));
     $this->benchmark->mark('building_html_end');
   }
 

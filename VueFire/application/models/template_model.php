@@ -20,12 +20,12 @@ class template_Model extends CI_Model
     if($this->agent->is_mobile() && file_exists($this->settings_model->get('default_template') . '/mobile'))
     {
       // switch to the mobile version - template has a mobile version
-      return $this->settings_model->get('default_template') . '/mobile';
+      return FCPATH . 'resources/templates/' . $this->settings_model->get('default_template') . '/mobile/views/';
     }
     else
     {
       // use the default path
-      return $this->settings_model->get('default_template');
+      return FCPATH . 'resources/templates/' . $this->settings_model->get('default_template') . '/views/';
     }
   }
 
