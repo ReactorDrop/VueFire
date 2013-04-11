@@ -1,0 +1,12 @@
+<!-- IF {topics|count} > 0 -->
+        topics<br /><br />
+    <!-- BEGIN topics AS topic -->
+        <a href="/f3-forum/t{topic.topic_id}-topic_name.html">{topic.topic_title}</a><br />
+
+
+    <!-- END topics -->
+
+        <br /><br />
+<!-- ELSE -->
+        no topics
+<!-- END -->

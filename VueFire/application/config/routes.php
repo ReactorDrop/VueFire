@@ -43,6 +43,7 @@ $route['default_controller'] = 'forum';
 $route['404_override'] = '';
 
 // forum routes
+$route['f(:num)-(:any)/t(:num)-(:any)'] = 'topic/view/$3';
 $route['f(:num)-(:any)'] = 'forum/view/$1';
 
 // thread routes
