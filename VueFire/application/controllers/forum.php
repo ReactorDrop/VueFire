@@ -1,11 +1,10 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class Forum extends CI_Controller
+class Forum extends VF_Controller
 {
   public function __construct()
   {
     parent::__construct();
-    $this->output->enable_profiler(true); // temporary
   }
 
   /**
@@ -15,7 +14,7 @@ class Forum extends CI_Controller
   public function index()
   {
     // load what we need
-    $this->load->model(array('forums_model', 'template_model', 'statistics_model', 'url_model'));
+    $this->load->model(array('forums_model', 'statistics_model', 'url_model'));
     $this->load->helper('url');
 
     // load data
@@ -38,7 +37,7 @@ class Forum extends CI_Controller
   public function view($intForumId)
   {
     // load what we need
-    $this->load->model(array('forums_model', 'template_model', 'url_model'));
+    $this->load->model(array('forums_model', 'url_model'));
     $this->load->helper('url');
 
     //

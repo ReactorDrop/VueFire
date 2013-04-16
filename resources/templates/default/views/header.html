@@ -1,5 +1,33 @@
 <head>
     <meta charset="utf-8">
     <title>{title}</title>
-    <link rel="stylesheet" href="/resources/{template_path}/css/style.css?r=">
+    <link rel="stylesheet" href="/resources/templates/{template_name}/css/style.css?r=">
 </head>
+
+<div id="page_container">
+  <div id="header">
+    <div id="logo_background">
+      <a href="/">
+        <img src="/resources/templates/images/header_logo.png" width="209" height="53" class="logo" />
+      </a>
+    </div>
+
+    <div id="search_box_wrapper">
+      <div id="search_box_holder">
+        <form action="/searchd.html" method="get" enctype="application/x-www-form-urlencoded" name="searchd" target="_top">
+          <input type="image" src="/resources/templates/images/search_box_button.png" border="0" alt="search" />
+          <input class="query" name="q" type="text" value="{search_term}" />
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div id="menu">
+    <div class="above">
+      <a href="/">forums</a>
+      <a href="/members.html">members</a>
+    </div>
+
+  </div>
+
+  <div id="page_content">

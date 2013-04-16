@@ -32,6 +32,14 @@ class template_Model extends CI_Model
   /**
    *
    */
+  public function get_template_name()
+  {
+    return $this->settings_model->get('default_template');
+  }
+
+  /**
+   *
+   */
   public function header()
   {
     // generic header
