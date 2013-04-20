@@ -17,12 +17,6 @@ img {
   background-color: #FFF;
 }
 
-#background_transparency {
-  background-position: center top;
-  background-repeat: no-repeat;
-  background-image: url('/media/images/site/backdrop_fade.png');
-}
-
 #header {
   margin: auto;
   height: 107px;
@@ -54,17 +48,18 @@ img {
   float: left;
   width: 209px;
   background-repeat: repeat;
-  background-image: url('/media/images/site/white_transparency_background.png');
+  background-image: url('/resources/templates/default/images/black_transparent.png');
 }
 
 #page_content {
-  margin-top: 38px;
-  padding-bottom: 25px;
+    width: 908px;
+    margin: auto;
+    padding-top: 30px;
 }
 
 #menu {
   width: 100%;
-  background-image: url('/media/images/site/black_transparent_box.png');
+  background-image: url('/resources/templates/default/images/black_transparent.png');
   background-repeat: repeat;
   color: #b4b4b4;
   padding-top: 30px;
@@ -151,7 +146,13 @@ p {
   font-size: 14px;
 }
 
-
+.forum_category_header {
+    background-color: #000000;
+    width: 100%;
+    padding: 10px;
+    height: 30px;
+    color: #ffffff;
+}
 
 /* footer */
 #footer {

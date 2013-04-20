@@ -1,7 +1,8 @@
 <!-- IF {forums_structure|count} > 0 -->
-        category<br /><br />
     <!-- BEGIN forums_structure AS categories -->
-        {categories.forum_name}<br /><br />
+    <div class="forum_category_header">
+        {categories.forum_name}
+    </div>
 
         <!-- BEGIN {categories.forums} AS category_forums -->
             -- <a href="{category_forums.forum_name_url}">{category_forums.forum_name}</a>
