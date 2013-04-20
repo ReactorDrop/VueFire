@@ -42,6 +42,9 @@
 $route['default_controller'] = 'forum';
 $route['404_override'] = '';
 
+# pages
+$route['members'] = 'users/members';
+
 // forum routes
 $route['f(:num)-(:any)/t(:num)-(:any)'] = 'topic/view/$3';
 $route['f(:num)-(:any)'] = 'forum/view/$1';
@@ -50,7 +53,9 @@ $route['f(:num)-(:any)'] = 'forum/view/$1';
 
 
 // search routes
-
+$route['searchd'] = 'search/index';
+$route['searchd/autocomplete'] = 'search/autocomplete';
+$route['searchd/advanced'] = 'search/advanced';
 
 // profile routes
 
