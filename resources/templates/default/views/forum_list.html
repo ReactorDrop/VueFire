@@ -6,7 +6,8 @@
 
         <!-- BEGIN {categories.forums} AS category_forums -->
             -- <a href="{category_forums.forum_name_url}">{category_forums.forum_name}</a>
-                ( {category_forums.statistics->posts} posts, {category_forums.statistics->topics} topics)<br />
+                ( {category_forums.statistics->posts} posts, {category_forums.statistics->topics} topics)
+                - latest post <a href="{category_forums.latest_post->post_title}">{category_forums.latest_post->post_title}</a> by {category_forums.latest_post->user_name} on {category_forums.latest_post->post_time}<br />
 
             <!-- BEGIN {category_forums.forums} AS sub_forums -->
                 -- -- <a href="{sub_forums.forum_name_url}">{sub_forums.forum_name}</a>

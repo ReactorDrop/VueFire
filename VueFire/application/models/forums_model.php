@@ -10,8 +10,8 @@ class forums_Model extends CI_Model
   #private $arrSettings = array();
 
   /**
-   *
-   *
+   * initialise
+   * @return void
    */
   function __construct()
   {
@@ -78,7 +78,6 @@ class forums_Model extends CI_Model
 
     // cleanup and return
     unset($this->arrForums);
-    echo('<pre>' . print_r($this->arrStorage['forums'], true) . '</pre>');
     return $this->arrStorage['forums'];
   }
 
@@ -150,6 +149,9 @@ class forums_Model extends CI_Model
     return $this->arrStorage['topics'][$intForumId][$intOffset . ',' . $intLimit];
   }
 
+  /**
+   * @param $intForumId
+   */
   public function get_info($intForumId)
   {
 

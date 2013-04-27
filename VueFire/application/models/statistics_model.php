@@ -30,9 +30,7 @@ class statistics_Model extends CI_Model
           $this->arrStorage['global']['general'][$arrStat['obj_name']] = $arrStat;
           break;
         case 'forum':
-          echo($arrStat['obj_name']);
           $arrPieces = explode('_', $arrStat['obj_name']);
-
           $this->arrStorage['global']['forum'][$arrPieces[0]][$arrPieces[1]] = $arrStat['obj_data'];
 
           break;
