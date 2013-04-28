@@ -38,6 +38,7 @@ class Forum extends VF_Controller
   {
     // load what we need
     $this->load->model(array('forums_model', 'url_model'));
+    $this->load->library('pagination');
     $this->load->helper('url');
 
     //
@@ -47,6 +48,8 @@ print_r($arrForumInfo);
 
     // load data
     $arrData['topics'] = $this->forums_model->get_forum_topics($intForumId);
+    $this->pagination->initialize(array('total_rows' => 200, 'per_page' => 16));
+    $arrData['pagination'] = $this->pagination->create_links();
 
     // build our html
     $this->benchmark->mark('building_html_start');
